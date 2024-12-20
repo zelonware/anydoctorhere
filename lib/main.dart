@@ -1,3 +1,4 @@
+import 'package:anydoctorhere/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class AnyDoctorApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Placeholder(),
+      home: const MainView(),
     );
   }
 }
