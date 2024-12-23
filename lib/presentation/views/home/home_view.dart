@@ -1,5 +1,8 @@
+import 'package:anydoctorhere/models/doctor_model.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/appointmenttype_widget.dart';
 import 'package:anydoctorhere/presentation/shared/sectionheader_widget.dart';
+import 'package:anydoctorhere/presentation/views/home/widgets/doctorlist_widget.dart';
+import 'package:anydoctorhere/presentation/views/home/widgets/symptonbox_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -10,6 +13,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  Map<String, String> symptons = {
+    '🤒': 'Temperature',
+    '🤧': 'Sneezing',
+    '🤕': 'Headache',
+    '😵‍💫': 'Dizzy'
+  };
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,11 +39,12 @@ class _HomeViewState extends State<HomeView> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
-                CircleAvatar(
-                  radius: 30,
-                  backgroundImage: NetworkImage(
-                      'https://static.vecteezy.com/system/resources/previews/008/957/225/non_2x/female-doctor-avatar-clipart-icon-in-flat-design-vector.jpg'),
-                ),
+                const CircleAvatar(
+                    radius: 27,
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: NetworkImage(
+                      "https://raw.githubusercontent.com/zelonware/anydoctorhere/refs/heads/main/img/user.png",
+                    )),
               ],
             ),
           ),
@@ -47,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
                   appointmentType: 'Clinic visit',
                   callToAction: 'Make an appointment',
                   appointmentIcon: Icons.add_circle,
-                  bgColor: Colors.purple,
+                  bgColor: Colors.blueAccent,
                 ),
                 SizedBox(
                   width: 10,
@@ -63,8 +74,50 @@ class _HomeViewState extends State<HomeView> {
           ),
           // Symptons options
           SectionHeader(title: 'What are your symptons?'),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              children: [
+                ...List.generate(
+                    symptons.length,
+                    (ind) => Padding(
+                        padding: ind == 0
+                            ? EdgeInsets.only(left: 15, right: 15)
+                            : EdgeInsets.only(right: 15),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.3),
+                                borderRadius: BorderRadius.circular(12)),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            child: SymptonBox(
+                              symptonName: symptons.values.elementAt(ind),
+                              symptonIcon: symptons.keys.elementAt(ind),
+                            ))))
+              ],
+            ),
+          ),
           // Popular doctors
           SectionHeader(title: 'Popular doctors'),
+          Expanded(
+              child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Wrap(
+              direction: Axis.horizontal,
+              runSpacing: 15,
+              spacing: 16,
+              children: [
+                ...List.generate(
+                  doctors.length,
+                  (ind) => GestureDetector(
+                    child: DoctorList(doctor: doctors[ind]),
+                    onTap: () {},
+                  ),
+                )
+              ],
+            ),
+          ))
         ],
       ),
     );
