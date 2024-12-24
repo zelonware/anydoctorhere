@@ -58,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
                   appointmentType: 'Clinic visit',
                   callToAction: 'Make an appointment',
                   appointmentIcon: Icons.add_circle,
-                  bgColor: Colors.blueAccent,
+                  bgColor: Colors.lightBlue,
                 ),
                 SizedBox(
                   width: 10,
@@ -101,13 +101,11 @@ class _HomeViewState extends State<HomeView> {
           // Popular doctors
           SectionHeader(title: 'Popular doctors'),
           Expanded(
-              child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Wrap(
-              direction: Axis.horizontal,
-              runSpacing: 15,
-              spacing: 16,
-              children: [
+              child: GridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 3,
+                  crossAxisSpacing: 1,
+                  children: [
                 ...List.generate(
                   doctors.length,
                   (ind) => GestureDetector(
@@ -115,9 +113,7 @@ class _HomeViewState extends State<HomeView> {
                     onTap: () {},
                   ),
                 )
-              ],
-            ),
-          ))
+              ]))
         ],
       ),
     );
