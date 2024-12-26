@@ -33,7 +33,7 @@ class _HomeViewState extends State<HomeView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Welcome, patient 👋🏻',
+                  'Welcome! 👋🏻',
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -103,8 +103,8 @@ class _HomeViewState extends State<HomeView> {
           Expanded(
               child: GridView.count(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 3,
-                  crossAxisSpacing: 1,
+                  mainAxisSpacing: 5,
+                  crossAxisSpacing: 3,
                   children: [
                 ...List.generate(
                   doctors.length,

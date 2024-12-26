@@ -2,7 +2,7 @@ import 'package:anydoctorhere/models/review_model.dart';
 
 class Doctor {
   final int doctorId;
-  final String name, specialist, about, location, image;
+  final String name, specialty, about, location, image;
   final int price;
   final int color;
   final List<Review> reviews;
@@ -10,7 +10,7 @@ class Doctor {
   const Doctor({
     required this.doctorId,
     required this.name,
-    required this.specialist,
+    required this.specialty,
     required this.about,
     required this.location,
     required this.image,
@@ -24,7 +24,7 @@ List<Doctor> doctors = [
   Doctor(
     doctorId: 1,
     name: "Chris Frazier",
-    specialist: "Pediatrician",
+    specialty: "Pediatrician",
     about: about,
     location: "123 Main St, Springfield",
     price: 59,
@@ -36,7 +36,7 @@ List<Doctor> doctors = [
   Doctor(
     doctorId: 2,
     name: "Viola Dunn",
-    specialist: "Therapist",
+    specialty: "Therapist",
     about: about,
     location: "3516 W. Gray St. Utica, Pennsylvania",
     price: 52,
@@ -52,7 +52,7 @@ List<Doctor> doctors = [
   Doctor(
     doctorId: 3,
     name: "Liuka Leehane",
-    specialist: "Orthopedics",
+    specialty: "Orthopedics",
     about: about,
     location: "357 Spruce Ln, Bostont",
     price: 53,
@@ -64,7 +64,7 @@ List<Doctor> doctors = [
   Doctor(
     doctorId: 4,
     name: "John Smith",
-    specialist: "Neurologists",
+    specialty: "Neurologists",
     about: about,
     location: "68 Stoughton Terrace",
     price: 80,
@@ -76,7 +76,7 @@ List<Doctor> doctors = [
   Doctor(
     doctorId: 5,
     name: "Raj Patel",
-    specialist: "Emergency Medicine",
+    specialty: "Emergency Medicine",
     about: about,
     location: "654 Pine St, Miami",
     price: 80,

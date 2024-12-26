@@ -18,17 +18,41 @@ class DoctorList extends StatelessWidget {
             BoxShadow(
                 color: Colors.black.withOpacity(0.5),
                 offset: Offset(4, 4),
-                blurRadius: 1,
-                spreadRadius: 1),
+                blurRadius: 5,
+                spreadRadius: 0.1),
           ]),
       child: Column(
         children: [
           CircleAvatar(
-            radius: 45,
+            radius: 40,
             backgroundColor: Colors.transparent,
             backgroundImage: NetworkImage(doctor.image),
           ),
-          Text(doctor.name)
+          Text(
+            'Dr. ${doctor.name}',
+            style: TextStyle(
+                fontSize: 15, letterSpacing: -.5, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            doctor.specialty,
+            style: TextStyle(color: Colors.grey, fontSize: 10),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+            decoration: BoxDecoration(
+                color: Colors.orange[50],
+                borderRadius: BorderRadius.circular(15)),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.star, color: Colors.orange, size: 15),
+                Text(rate(doctor).toStringAsFixed(1))
+              ],
+            ),
+          )
         ],
       ),
     );
