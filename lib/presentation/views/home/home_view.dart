@@ -1,4 +1,5 @@
 import 'package:anydoctorhere/models/doctor_model.dart';
+import 'package:anydoctorhere/presentation/views/home/doctordetail_view.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/appointmenttype_widget.dart';
 import 'package:anydoctorhere/presentation/shared/sectionheader_widget.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/doctorlist_widget.dart';
@@ -110,7 +111,13 @@ class _HomeViewState extends State<HomeView> {
                   doctors.length,
                   (ind) => GestureDetector(
                     child: DoctorList(doctor: doctors[ind]),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  DoctorDetailView(doctor: doctors[ind])));
+                    },
                   ),
                 )
               ]))
