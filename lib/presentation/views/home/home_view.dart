@@ -1,5 +1,5 @@
 import 'package:anydoctorhere/models/doctor_model.dart';
-import 'package:anydoctorhere/presentation/views/home/doctordetail_view.dart';
+import 'package:anydoctorhere/presentation/views/doctordetail/doctordetail_view.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/appointmenttype_widget.dart';
 import 'package:anydoctorhere/presentation/shared/sectionheader_widget.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/doctorlist_widget.dart';

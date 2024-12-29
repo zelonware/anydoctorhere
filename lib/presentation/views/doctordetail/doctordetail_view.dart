@@ -1,4 +1,6 @@
 import 'package:anydoctorhere/models/doctor_model.dart';
+import 'package:anydoctorhere/presentation/shared/starrating_widget.dart';
+import 'package:anydoctorhere/presentation/views/doctordetail/widgets/reviewcard_widget.dart';
 import 'package:flutter/material.dart';
 
 class DoctorDetailView extends StatelessWidget {
@@ -41,7 +43,7 @@ class DoctorDetailView extends StatelessWidget {
             ),
           ),
           CircleAvatar(
-            radius: 45,
+            radius: 35,
             backgroundColor: Colors.white,
             backgroundImage: NetworkImage(doctor.image),
           ),
@@ -96,15 +98,82 @@ class DoctorDetailView extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           Expanded(
-            child: Container(
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)))),
+                        topRight: Radius.circular(30))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // about
+                    Text(
+                      'About them',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    Text('${doctor.name} ${doctor.about}'),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // reviews
+                    Row(
+                      children: [
+                        Text(
+                          'Reviews',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        StarRating(rating: rate(doctor)),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('(${doctor.reviews.length})')
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            ...List.generate(
+                                doctor.reviews.length,
+                                (ind) =>
+                                    ReviewCard(review: doctor.reviews[ind]))
+                          ],
+                        )),
+
+                    // location
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      child: Text('Location'),
+                    ),
+                    // booking
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      color: Colors.blueAccent,
+                      child: Text('Book now'),
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
         ],
       )),

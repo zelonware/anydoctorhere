@@ -1,4 +1,5 @@
 import 'package:anydoctorhere/models/doctor_model.dart';
+import 'package:anydoctorhere/presentation/shared/starrating_widget.dart';
 import 'package:flutter/material.dart';
 
 class DoctorList extends StatelessWidget {
@@ -45,13 +46,7 @@ class DoctorList extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.orange[50],
                 borderRadius: BorderRadius.circular(15)),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.star, color: Colors.orange, size: 15),
-                Text(rate(doctor).toStringAsFixed(1))
-              ],
-            ),
+            child: StarRating(rating: rate(doctor)),
           )
         ],
       ),
