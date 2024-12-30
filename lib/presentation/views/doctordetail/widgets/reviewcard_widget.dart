@@ -16,7 +16,7 @@ class ReviewCard extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.black.withOpacity(0.2),
                 offset: Offset(4, 4),
                 blurRadius: 10,
                 spreadRadius: 1),
@@ -36,8 +36,15 @@ class ReviewCard extends StatelessWidget {
                   backgroundImage: NetworkImage(review.image),
                   radius: 30,
                 ),
+                SizedBox(
+                  width: 5,
+                ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [Text(review.fullname), Text(review.date)],
+                ),
+                SizedBox(
+                  width: 15,
                 ),
                 StarRating(rating: review.rate)
               ],

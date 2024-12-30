@@ -42,10 +42,20 @@ class DoctorDetailView extends StatelessWidget {
               children: [],
             ),
           ),
-          CircleAvatar(
-            radius: 35,
-            backgroundColor: Colors.white,
-            backgroundImage: NetworkImage(doctor.image),
+          Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: Colors.white,
+                  width: 4,
+                )),
+            child: CircleAvatar(
+              radius: 35,
+              backgroundColor: Colors.white,
+              backgroundImage: NetworkImage(doctor.image),
+            ),
           ),
           SizedBox(
             height: 10,
@@ -144,6 +154,8 @@ class DoctorDetailView extends StatelessWidget {
                       height: 10,
                     ),
                     SingleChildScrollView(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
@@ -158,18 +170,68 @@ class DoctorDetailView extends StatelessWidget {
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      color: Colors.grey,
-                      child: Text('Location'),
+                    Text(
+                      'Location',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          shape: CircleBorder(),
+                          color: const Color.fromARGB(255, 204, 214, 219),
+                          padding: EdgeInsets.all(15),
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.location_city,
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nearest clinic in town',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(doctor.location)
+                          ],
+                        )
+                      ],
                     ),
                     // booking
                     SizedBox(
                       height: 10,
                     ),
-                    Container(
-                      color: Colors.blueAccent,
-                      child: Text('Book now'),
-                    )
+                    Divider(
+                      color: Colors.grey,
+                      thickness: 1,
+                    ),
+                    Column(children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Consultation price'),
+                          Text(
+                            '${doctor.price} \$',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          )
+                        ],
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              foregroundColor: Colors.white),
+                          onPressed: () {},
+                          child: Text(
+                            'Book appointment',
+                            style: TextStyle(fontSize: 18),
+                          ))
+                    ])
                   ],
                 ),
               ),
