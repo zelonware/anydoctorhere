@@ -17,7 +17,7 @@ class DoctorList extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.5),
+                color: Colors.grey,
                 offset: Offset(4, 4),
                 blurRadius: 5,
                 spreadRadius: 0.1),

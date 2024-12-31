@@ -88,7 +88,7 @@ class _HomeViewState extends State<HomeView> {
                             : EdgeInsets.only(right: 15),
                         child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(0.3),
+                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(12)),
                             padding: EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 15),

@@ -20,7 +20,7 @@ class AppointmentType extends StatelessWidget {
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.grey,
               offset: Offset(4, 4),
               blurRadius: 10,
               spreadRadius: 1),

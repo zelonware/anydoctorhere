@@ -182,6 +182,7 @@ class DoctorDetailView extends StatelessWidget {
                       children: [
                         MaterialButton(
                           shape: CircleBorder(),
+                          elevation: 5.0,
                           color: const Color.fromARGB(255, 204, 214, 219),
                           padding: EdgeInsets.all(15),
                           onPressed: () {},
