@@ -1,6 +1,6 @@
 import 'package:anydoctorhere/presentation/views/home/home_view.dart';
 import 'package:anydoctorhere/presentation/views/messages_view.dart';
-import 'package:anydoctorhere/presentation/views/schedule_view.dart';
+import 'package:anydoctorhere/presentation/views/schedule/schedule_view.dart';
 import 'package:anydoctorhere/presentation/views/settings_view.dart';
 import 'package:flutter/material.dart';
 
