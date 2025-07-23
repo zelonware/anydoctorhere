@@ -4,6 +4,7 @@ import 'package:anydoctorhere/presentation/views/home/widgets/appointmenttype_wi
 import 'package:anydoctorhere/presentation/shared/sectionheader_widget.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/doctorlist_widget.dart';
 import 'package:anydoctorhere/presentation/views/home/widgets/symptonbox_widget.dart';
+import 'package:anydoctorhere/services/service_locator.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,12 +15,44 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final _doctorService = ServiceLocator().doctorService;
+  List<Doctor> doctors = [];
+  bool isLoading = true;
+  String? errorMessage;
+
   Map<String, String> symptons = {
     '🤒': 'Temperature',
     '🤧': 'Sneezing',
     '🤕': 'Headache',
     '😵‍💫': 'Dizzy'
   };
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDoctors();
+  }
+
+  Future<void> _loadDoctors() async {
+    try {
+      setState(() {
+        isLoading = true;
+        errorMessage = null;
+      });
+      
+      final loadedDoctors = await _doctorService.getAllDoctors();
+      
+      setState(() {
+        doctors = loadedDoctors;
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        errorMessage = e.toString();
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,27 +135,101 @@ class _HomeViewState extends State<HomeView> {
           // Popular doctors
           SectionHeader(title: 'Popular doctors'),
           Expanded(
-              child: GridView.count(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 5,
-                  crossAxisSpacing: 3,
-                  children: [
-                ...List.generate(
-                  doctors.length,
-                  (ind) => GestureDetector(
-                    child: DoctorList(doctor: doctors[ind]),
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) =>
-                                  DoctorDetailView(doctor: doctors[ind])));
-                    },
-                  ),
-                )
-              ]))
+            child: _buildDoctorsSection(),
+          )
         ],
       ),
+    );
+  }
+
+  Widget _buildDoctorsSection() {
+    if (isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (errorMessage != null) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'Error loading doctors',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              errorMessage!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey[500],
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: _loadDoctors,
+              child: const Text('Try again'),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (doctors.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.medical_services_outlined,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'No available doctors',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return GridView.count(
+      crossAxisCount: 2,
+      mainAxisSpacing: 5,
+      crossAxisSpacing: 3,
+      children: [
+        ...List.generate(
+          doctors.length,
+          (ind) => GestureDetector(
+            child: DoctorList(doctor: doctors[ind]),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DoctorDetailView(doctor: doctors[ind]),
+                ),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }

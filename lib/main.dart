@@ -1,7 +1,10 @@
 import 'package:anydoctorhere/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
 
+import 'package:anydoctorhere/services/service_locator.dart';
+
 void main() {
+  ServiceLocator().initialize();
   runApp(const AnyDoctorApp());
 }
 
